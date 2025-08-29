@@ -57,3 +57,33 @@ Cada microservicio tiene su propio archivo `application.properties` en `src/main
 Ejecuta las pruebas unitarias con:
 ```sh
 mvn test
+```
+
+## Arquitectura
+
+```mermaid
+flowchart LR
+    subgraph Productos
+        A[Productos API]
+    end
+    subgraph Inventario
+        B[Inventario API]
+    end
+    subgraph DB
+        C[(PostgreSQL)]
+    end
+    A -- HTTP/JSON API + API Key --> B
+    A -- JDBC --> C
+    B -- JDBC --> C
+```
+
+## Autenticación entre microservicios
+
+Las llamadas entre servicios requieren una API Key en el header:  
+`X-API-KEY: <tu_api_key>`
+
+Configura la API Key en los archivos `application.properties` y como variable de entorno en Docker.
+
+## Logs estructurados
+
+Ambos servicios usan SLF4J para logs estructurados. Los eventos de inventario se registran en consola.

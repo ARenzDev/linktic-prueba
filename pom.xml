@@ -25,4 +25,6 @@
     <build>
         <!-- Normalmente no se agregan plugins aquí, sino en los módulos hijos -->
     </build>
+    <dependencies>
+    </dependencies>
 </project>
